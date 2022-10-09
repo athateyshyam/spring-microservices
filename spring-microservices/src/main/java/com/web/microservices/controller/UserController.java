@@ -12,15 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-	
+
 	@GetMapping
-	public String getUsers(@RequestParam(value = "page")int page,@RequestParam(value="limit")int limit) {
-		return "Get users method called with page = "+page+" and limit = "+limit;
+	public String getUsers(@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "limit", defaultValue = "50") int limit,
+			@RequestParam(value = "sort", defaultValue = "desc", required = false) String sort) {
+		return "Get users method called with page = " + page + " and limit = " + limit+" sort = "+sort;
 	}
-	
+
 	@GetMapping(path = "/{userId}")
 	public String getUser(@PathVariable String userId) {
-		return "Get users method called with userId: "+userId;
+		return "Get users method called with userId: " + userId;
 	}
 
 	@PostMapping
