@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.microservices.response.model.UserResponse;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -17,12 +19,16 @@ public class UserController {
 	public String getUsers(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "50") int limit,
 			@RequestParam(value = "sort", defaultValue = "desc", required = false) String sort) {
-		return "Get users method called with page = " + page + " and limit = " + limit+" sort = "+sort;
+		return "Get users method called with page = " + page + " and limit = " + limit + " sort = " + sort;
 	}
 
 	@GetMapping(path = "/{userId}")
-	public String getUser(@PathVariable String userId) {
-		return "Get users method called with userId: " + userId;
+	public UserResponse getUser(@PathVariable String userId) {
+		UserResponse returnValue = new UserResponse();
+		returnValue.setEmail("athateyshyam@gmail.com");
+		returnValue.setFirstName("Shyam");
+		returnValue.setLastName("Athatey");
+		return returnValue;
 	}
 
 	@PostMapping
